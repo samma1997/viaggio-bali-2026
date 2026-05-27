@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f766e" />
+  <title>Bali Photo Trip 2026 — Itinerario Fotografico</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🌺</span>
+      <div>
+        <h1>Bali Photo Trip</h1>
+        <p class="tagline">Itinerario fotografico giorno per giorno</p>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="themeToggle" class="icon-btn" title="Tema chiaro/scuro" aria-label="Cambia tema">🌙</button>
+      <button id="favOnly" class="icon-btn" title="Mostra solo preferiti" aria-label="Preferiti">⭐</button>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Sezioni"></nav>
+
+  <main id="main">
+    <section id="overview" class="view active">
+      <div class="hero">
+        <div class="hero-inner">
+          <h2>Ciao Luca! 📸</h2>
+          <p>La tua guida fotografica per Bali. 14 giorni, oltre 40 spot, consigli di scatto, orari golden hour e mappe. Tocca un giorno per iniziare.</p>
+          <div class="stats" id="stats"></div>
+        </div>
+      </div>
+
+      <h3 class="section-title">🗓️ Panoramica del viaggio</h3>
+      <div class="day-grid" id="dayGrid"></div>
+
+      <h3 class="section-title">🎒 Gear consigliato</h3>
+      <div class="gear-grid">
+        <div class="gear-card"><span>📷</span><h4>Body + grandangolo</h4><p>16-35mm o equivalente per paesaggi e templi.</p></div>
+        <div class="gear-card"><span>🔭</span><h4>Tele 70-200mm</h4><p>Per ritratti, dettagli su risaie e wildlife.</p></div>
+        <div class="gear-card"><span>🦿</span><h4>Treppiede leggero</h4><p>Indispensabile per sunrise, lunghe esposizioni e cascate.</p></div>
+        <div class="gear-card"><span>🌫️</span><h4>Filtri ND + CPL</h4><p>ND 6/10 per cascate e mare, polarizzatore per il verde delle risaie.</p></div>
+        <div class="gear-card"><span>🚁</span><h4>Drone</h4><p>Tegallalang, Nusa Penida, Sekumpul. Controlla le no-fly zone vicino ai templi.</p></div>
+        <div class="gear-card"><span>🔋</span><h4>Batterie + power bank</h4><p>Almeno 3 batterie. L'umidità le scarica.</p></div>
+        <div class="gear-card"><span>🧻</span><h4>Panni microfibra + silica</h4><p>Umidità tropicale = obiettivi appannati. Asciuga sempre.</p></div>
+        <div class="gear-card"><span>🎽</span><h4>Sarong</h4><p>Obbligatorio nei templi. Comprane uno locale come souvenir.</p></div>
+      </div>
+
+      <h3 class="section-title">💡 Regole d'oro per Bali</h3>
+      <ul class="tips-list">
+        <li><b>Sveglia all'alba</b>: i templi si riempiono dalle 9. Alle 5:30 sei spesso da solo.</li>
+        <li><b>Rispetto</b>: chiedi sempre prima di fotografare persone, soprattutto durante cerimonie.</li>
+        <li><b>Mai sopra le teste</b>: in cerimonia, non puntare l'obiettivo dall'alto verso i fedeli.</li>
+        <li><b>Pioggia tropicale</b>: copre la macchina con sacchetto. Spesso piove 30 min poi torna sole con luce magica.</li>
+        <li><b>Bargaining</b>: tratta con il sorriso, mai aggressivo. Lo scooter è il modo migliore per spostarsi.</li>
+        <li><b>Offerte (canang sari)</b>: non calpestarle mai. Sono un soggetto fotografico stupendo di prima mattina.</li>
+      </ul>
+    </section>
+
+    <section id="day" class="view"></section>
+
+    <section id="map" class="view">
+      <h2>🗺️ Mappa completa</h2>
+      <p class="muted">Tutti gli spot del viaggio. Tocca un marker per aprire le indicazioni.</p>
+      <div id="mapList" class="map-list"></div>
+    </section>
+
+    <section id="checklist" class="view">
+      <h2>✅ Checklist fotografica</h2>
+      <p class="muted">Spunta gli spot che hai già fotografato. I dati restano salvati sul telefono.</p>
+      <div id="checklistList"></div>
+      <div class="progress">
+        <div class="progress-bar"><div id="progressFill"></div></div>
+        <span id="progressText">0 / 0</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Selamat jalan, Luca! 🌴 Buon viaggio.</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
