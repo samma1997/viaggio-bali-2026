@@ -62,6 +62,12 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; colo
 .card-title { font-size: 17px; font-weight: 600; color: #222; line-height: 1.2; flex: 1; }
 .card-rating { font-size: 14px; font-weight: 500; color: #222; display: flex; align-items: center; gap: 3px; flex-shrink: 0; }
 .card-tagline { font-size: 15px; color: #717171; margin-bottom: 6px; line-height: 1.3; }
+.card-preview { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 10px 0 12px; padding: 10px 12px; background: #fafafa; border-radius: 10px; border: 1px solid #f0f0f0; }
+.preview-step { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #444; }
+.preview-time { font-weight: 700; color: #FF385C; font-size: 11px; }
+.preview-emoji { font-size: 14px; line-height: 1; }
+.preview-action { color: #222; font-weight: 500; }
+.preview-arrow { color: #d0d0d0; font-size: 11px; align-self: center; margin: 0 2px; }
 .card-meta { font-size: 14px; color: #717171; display: flex; gap: 12px; margin-bottom: 4px; }
 .card-meta span { display: flex; align-items: center; gap: 4px; }
 .card-price { font-size: 14px; color: #222; margin-top: 4px; }
@@ -677,6 +683,25 @@ function Card({ it, done, onOpen, onToggle }) {
     h('div', { className: 'card-content' },
       h('div', { className: 'card-title-row' }, h('div', { className: 'card-title' }, it.name), h('div', { className: 'card-rating' }, '★ ', it.rating)),
       h('div', { className: 'card-tagline' }, it.tagline),
+      (() => {
+        const preview = it.stops.filter(s => s.tag).slice(0, 4);
+        if (preview.length === 0) return null;
+        const emojiOf = (tag) => { const parts = (tag || '').split(' '); return parts[parts.length - 1] || '•'; };
+        const shortAction = (a) => { const w = a.split(' '); return w.slice(0, 2).join(' ') + (w.length > 2 ? '…' : ''); };
+        return h('div', { className: 'card-preview' },
+          preview.flatMap((s, i) => {
+            const items = [
+              h('span', { key: 'step-' + i, className: 'preview-step' },
+                h('span', { className: 'preview-time' }, s.time.replace(/^(SAB|DOM|VEN) /, '')),
+                h('span', { className: 'preview-emoji' }, emojiOf(s.tag)),
+                h('span', { className: 'preview-action' }, shortAction(s.action))
+              )
+            ];
+            if (i < preview.length - 1) items.push(h('span', { key: 'arr-' + i, className: 'preview-arrow' }, '→'));
+            return items;
+          })
+        );
+      })(),
       h('div', { className: 'card-meta' }, h('span', null, '⏱️ ', it.duration), h('span', null, '🛵 ', it.drive, 'min'), h('span', null, diff.emoji, ' ', diff.label)),
       h('div', { className: 'card-price' }, h('strong', null, it.cost), ' · parti ', it.leaveBy)
     )
