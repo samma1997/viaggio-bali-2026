@@ -148,7 +148,9 @@ const h = React.createElement;
 const CANGGU = { lat: -8.6478, lng: 115.1385 };
 const END_DATE = new Date('2026-06-24');
 
+// type: morning (mattina <7h) · quick (vicino Canggu <3h) · weekend (multi-giorno) · fullday (giornata intera, sabato) · experience (mezza giornata) · food (pasto/sera) · culture (cerimonie/eventi)
 const itineraries = [
+  // ========== MATTINE (lontane, parti all'alba) ==========
   { id: 'it-1', name: 'Tanah Lot + Taman Ayun', type: 'morning', emoji: '⛩️', gradient: 1, duration: '5-6h', leaveBy: '06:00', backBy: '12:30', drive: 50, difficulty: 'easy', tagline: 'Due templi iconici in una mattina', rating: 4.8,
     stops: [
       { time: '06:00', action: 'Partenza Canggu', detail: 'Caffè veloce, parti col fresco' },
@@ -240,6 +242,312 @@ const itineraries = [
       { time: 'DOM 14:00', action: 'Ritorno', detail: 'Barca verso Sanur + moto a Canggu' },
     ],
     why: 'Paesaggi che la main island non ha. Scogliere a strapiombo, acqua turchese. Pesante ma indimenticabile.', cost: '~1.5M IDR' },
+
+  // ========== VICINO CANGGU (quick — anche dopo lavoro) ==========
+  { id: 'it-9', name: 'Mercato Tibubeneng + risaie alba', type: 'quick', emoji: '🌾', gradient: 4, duration: '2h', leaveBy: '05:30', backBy: '08:00', drive: 5, difficulty: 'easy', tagline: 'A 5 min da casa: vita locale autentica', rating: 4.6,
+    stops: [
+      { time: '05:30', action: 'Scooter da casa', detail: 'Niente caffè, lo prendi dopo' },
+      { time: '05:45', action: 'Pasar Tibubeneng', detail: 'Mercato per locali dietro Pererenan. Pesce fresco, verdure, frutta. Zero turisti', tag: 'gratis · 🧺' },
+      { time: '06:30', action: 'Risaie Tibubeneng', detail: '5 min a piedi: contadini al lavoro, anatre, palme. Vita rurale a 1km dal mare' },
+      { time: '07:30', action: 'Warung Pererenan', detail: 'Nasi campur o pisang goreng + kopi tubruk' },
+      { time: '08:30', action: 'Casa', detail: 'Hai 6h prima del lavoro' },
+    ],
+    why: 'La cosa più sottovalutata: la vita vera è a 5 min, non a 90 min in moto. Vai quando piove altrove o sei stanco.', cost: '~30k IDR' },
+  { id: 'it-10', name: 'Surf lesson Old Man\'s', type: 'quick', emoji: '🏄', gradient: 6, duration: '2-3h', leaveBy: '06:00', backBy: '09:00', drive: 5, difficulty: 'easy', tagline: 'Prima onda della tua vita, dietro casa', rating: 4.8,
+    stops: [
+      { time: '06:00', action: 'Old Man\'s Beach', detail: 'Prenota online con Bali Green Surf School o Pererenan Surf' },
+      { time: '06:30', action: 'Lezione 1h30', detail: 'Tavola softboard 8\', onde basse, istruttore filma. Tag: 400k', tag: '400k IDR · 🏄' },
+      { time: '08:00', action: 'Colazione Old Man\'s warung', detail: 'Smoothie bowl + uova + caffè vista mare' },
+      { time: '09:00', action: 'Casa', detail: 'Doccia, lavoro pomeriggio' },
+    ],
+    why: 'Canggu è IL posto dove imparare. Onde lunghe, istruttori bravi, costi bassi. Una lezione vera ti cambia la prospettiva del soggiorno.', cost: '~450k IDR' },
+  { id: 'it-11', name: 'Pura Batu Bolong + Echo sunset', type: 'quick', emoji: '🌅', gradient: 5, duration: '3h', leaveBy: '17:00', backBy: '20:00', drive: 8, difficulty: 'easy', tagline: 'Tempio sull\'oceano + tramonto a piedi nudi', rating: 4.7,
+    stops: [
+      { time: '17:00', action: 'Pura Batu Bolong', detail: 'Tempietto su roccia bucata, lava nera, onde. Locali fanno offerte', tag: 'gratis · ⛩️' },
+      { time: '17:45', action: 'Old Man\'s Beach', detail: 'Camminata sulla sabbia verso Echo, surf check' },
+      { time: '18:15', action: 'Echo Beach', detail: 'Tramonto. Bean bag, drink al La Brisa o The Lawn' },
+      { time: '19:30', action: 'Cena warung', detail: 'Warung Local, La Baracca o sashimi a The Shady Shack' },
+    ],
+    why: 'Routine perfetta da feriale. Tempio vero (non turistico) + tramonto + cena. Niente moto lunghe.', cost: '~150k IDR' },
+  { id: 'it-12', name: 'Sangeh Monkey Forest + Taman Ayun', type: 'quick', emoji: '🐒', gradient: 4, duration: '4h', leaveBy: '07:00', backBy: '11:00', drive: 35, difficulty: 'easy', tagline: 'Scimmie nella foresta di noci moscate', rating: 4.5,
+    stops: [
+      { time: '07:00', action: 'Parti', detail: 'Verso Mengwi' },
+      { time: '07:45', action: 'Sangeh Monkey Forest', detail: 'Foresta di noce moscata 30m, macachi semi-selvatici (più chill di Ubud Monkey)', tag: '30k IDR · 🐒' },
+      { time: '09:00', action: 'Pura Taman Ayun', detail: 'Tempio reale con fossato, simmetrie pazze. Niente turisti', tag: '30k IDR · ⛩️' },
+      { time: '10:00', action: 'Warung Mengwi', detail: 'Nasi campur 25k' },
+      { time: '11:00', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'Le scimmie di Ubud sono aggressive (troppo cibo turistico). A Sangeh sono "vere", divertenti e niente folla. + Taman Ayun è un bonus.', cost: '~90k IDR' },
+
+  // ========== MERCATI & VITA LOCALE ==========
+  { id: 'it-13', name: 'Pasar Badung + Kumbasari (Denpasar)', type: 'morning', emoji: '🧺', gradient: 7, duration: '3-4h', leaveBy: '05:30', backBy: '09:30', drive: 25, difficulty: 'easy', tagline: 'Il mercato più grande di Bali, vero', rating: 4.7,
+    stops: [
+      { time: '05:30', action: 'Parti', detail: 'Verso Denpasar col fresco, evita traffico' },
+      { time: '06:00', action: 'Pasar Badung', detail: '4 piani: piano 1 spezie/frutta, piano 2 carni/pesce, piano 3 sarong/abbigliamento, piano 4 cibo. Vero, sporco, perfetto', tag: 'gratis · 🧺' },
+      { time: '07:30', action: 'Pasar Kumbasari', detail: 'Sul fiume, di fronte: artigianato, batik, sculture, contratta' },
+      { time: '08:00', action: 'Bubur ayam', detail: 'Wong Solo o un warung del mercato: porridge di pollo per colazione' },
+      { time: '09:30', action: 'Rientro', detail: 'Casa per lavoro' },
+    ],
+    why: 'Il mercato per i balinesi, non per i turisti. Dopo le 8 si svuota e fa caldo. Vai presto, prima volta vai con uno zaino piccolo e occhi aperti.', cost: '~50k IDR' },
+  { id: 'it-14', name: 'Pasar Ubud alba + Saraswati', type: 'morning', emoji: '🌺', gradient: 3, duration: '5-6h', leaveBy: '05:30', backBy: '12:00', drive: 75, difficulty: 'easy', tagline: 'Il mercato sacro all\'ora delle donne', rating: 4.8,
+    stops: [
+      { time: '05:30', action: 'Parti Canggu', detail: 'Verso Ubud col fresco' },
+      { time: '06:30', action: 'Pasar Ubud (mercato vero)', detail: 'Le donne portano canang sari, fiori, frutta. Reportage puro fino alle 8. Dopo diventa mercato turistico', tag: 'gratis · 🌺' },
+      { time: '07:45', action: 'Colazione warung', detail: 'Pisang goreng + kopi nei vicoli' },
+      { time: '08:30', action: 'Pura Taman Saraswati', detail: 'Stagno di loto + tempio rosa. Spettacolare, gratuito', tag: 'gratis · ⛩️' },
+      { time: '09:30', action: 'Campuhan Ridge Walk', detail: 'Sentiero sul crinale 2km. Verde, vento, niente macchine' },
+      { time: '11:30', action: 'Pranzo', detail: 'Hujan Locale o Locavore To-Go' },
+      { time: '12:30', action: 'Rientro', detail: 'Traffico Ubud-Canggu pesante: 1h30' },
+    ],
+    why: 'La VERA Ubud. Alle 6 vedi le donne fare offerte, alle 9 Ubud diventa Disneyland. Hai 2h di magia.', cost: '~120k IDR' },
+  { id: 'it-15', name: 'Mercato pesce Kedonganan', type: 'quick', emoji: '🐟', gradient: 8, duration: '3h', leaveBy: '05:30', backBy: '08:30', drive: 30, difficulty: 'easy', tagline: 'Le barche scaricano il pesce all\'alba', rating: 4.6,
+    stops: [
+      { time: '05:30', action: 'Parti', detail: 'Verso aeroporto poi Jimbaran' },
+      { time: '06:00', action: 'Mercato Kedonganan', detail: 'Jukung colorati che attraccano, asta del pesce, donne in sarong che pesano. Foto rispettose, niente flash', tag: 'gratis · 🐟' },
+      { time: '07:00', action: 'Spiaggia + colazione', detail: 'Caffè in warung sul mare' },
+      { time: '08:30', action: 'Casa', detail: 'Hai 6h prima del lavoro' },
+    ],
+    why: 'Esperienza di porto reale, niente "show". Lavoratori veri, profumi forti, vita vera. La memoria visiva più forte del viaggio.', cost: '~30k IDR' },
+  { id: 'it-16', name: 'Gianyar Night Market', type: 'food', emoji: '🌃', gradient: 7, duration: '4h', leaveBy: '18:00', backBy: '22:00', drive: 75, difficulty: 'easy', tagline: 'Il night market dei locali. Babi, sate, jaja', rating: 4.7,
+    stops: [
+      { time: '18:00', action: 'Parti Canggu', detail: 'Verso Gianyar (a est di Ubud)' },
+      { time: '19:30', action: 'Gianyar Night Market', detail: 'Bancarelle di babi guling, sate lilit, lawar, nasi campur, jaja Bali (dolcetti)', tag: 'gratis · 🍢' },
+      { time: '19:45', action: 'Mangia tutto', detail: '100k per 5 piatti. Babi guling QUI è meglio che a Ibu Oka' },
+      { time: '21:00', action: 'Rientro lento', detail: 'Casa' },
+    ],
+    why: 'Più autentico di Sanur night market. Solo locali. Vai mercoledì-sabato sera. La cucina più vera di Bali.', cost: '~120k IDR' },
+  { id: 'it-17', name: 'Sanur night market + spiaggia', type: 'food', emoji: '🥘', gradient: 7, duration: '3-4h', leaveBy: '18:00', backBy: '21:30', drive: 45, difficulty: 'easy', tagline: 'Street food affidabile + jukung sulla spiaggia', rating: 4.5,
+    stops: [
+      { time: '18:00', action: 'Parti Canggu', detail: 'Sanur a est' },
+      { time: '19:00', action: 'Sindhu Night Market', detail: 'Street food: nasi goreng, mie goreng, sate ayam, ikan bakar (pesce alla griglia), martabak per dolce' },
+      { time: '20:30', action: 'Sanur Beach', detail: 'Camminata sul lungomare, jukung pronte per alba pescatori' },
+      { time: '21:30', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'Più rilassato di Gianyar, più vicino. Sanur è la Bali "vecchia": niente locali pretenziosi, gente del posto + pensionati.', cost: '~80k IDR' },
+
+  // ========== VILLAGGI AUTENTICI ==========
+  { id: 'it-18', name: 'Penglipuran Village', type: 'morning', emoji: '🏘️', gradient: 4, duration: '6h', leaveBy: '06:00', backBy: '12:00', drive: 85, difficulty: 'easy', tagline: 'Il villaggio Bali Aga più "intatto"', rating: 4.7,
+    stops: [
+      { time: '06:00', action: 'Parti', detail: 'Verso Bangli (sopra Ubud, sotto Kintamani)' },
+      { time: '07:45', action: 'Arrivo Penglipuran', detail: 'Vestiti rispettoso. Niente jeans strappati', tag: '50k IDR · 🏘️' },
+      { time: '08:00', action: 'Walk del villaggio', detail: 'Case Bali Aga identiche con gate scolpiti su via principale di pietra lavica. Famiglie veere, lavoro normale, niente "show"' },
+      { time: '09:30', action: 'Foresta bambù', detail: 'Sentiero dietro il villaggio nella foresta sacra di bambù' },
+      { time: '10:30', action: 'Pranzo nel villaggio', detail: 'Warung di una famiglia, nasi tradizionale loloh cemcem (bevanda di foglie)' },
+      { time: '12:00', action: 'Rientro', detail: 'Casa per lavoro' },
+    ],
+    why: 'Bali Aga = popolazione pre-induista. Architettura PRE-1500. Una delle 3 esperienze più "vere" che farai. Penglipuran è dichiarato "il villaggio più pulito del mondo" dalla CNN.', cost: '~100k IDR' },
+  { id: 'it-19', name: 'Trunyan + lago Batur', type: 'experience', emoji: '🪦', gradient: 7, duration: '6-7h', leaveBy: '07:00', backBy: '14:00', drive: 110, difficulty: 'medium', tagline: 'Bali Aga con cimitero di crani all\'aperto', rating: 4.3,
+    stops: [
+      { time: '07:00', action: 'Parti', detail: 'Verso Kintamani' },
+      { time: '09:30', action: 'Kedisan port', detail: 'Sponda sud lago Batur, fermati al porto' },
+      { time: '10:00', action: 'Barca a Trunyan', detail: '40 min sul lago vulcanico, vista cratere. Tag: 350k barca', tag: '350k IDR · ⛵' },
+      { time: '11:00', action: 'Cimitero di Kuburan', detail: 'I morti vengono lasciati sotto l\'albero taru menyan che neutralizza l\'odore. I crani vengono poi posati su scaffali di pietra. NON è per stomaci deboli. Rispetto assoluto.', tag: '⚠️ forte impatto' },
+      { time: '12:30', action: 'Ritorno barca', detail: 'Pranzo Kintamani vista cratere' },
+      { time: '14:00', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'Esperienza estrema e controversa. Solo se ti interessa l\'antropologia. Andare con rispetto profondo: niente foto dei resti. Il modo in cui questa cultura concepisce la morte ti resterà.', cost: '~600k IDR' },
+
+  // ========== CASCATE & NATURA ==========
+  { id: 'it-20', name: 'NungNung + Plaga rurale', type: 'morning', emoji: '💧', gradient: 2, duration: '5-6h', leaveBy: '06:00', backBy: '12:00', drive: 75, difficulty: 'medium', tagline: 'La cascata enorme che (quasi) nessuno conosce', rating: 4.7,
+    stops: [
+      { time: '06:00', action: 'Parti', detail: 'Verso nord, zona Plaga' },
+      { time: '07:15', action: 'Plaga risaie', detail: 'Villaggio rurale a nord di Petang. Risaie ripide, sentieri, contadini' },
+      { time: '08:30', action: 'NungNung Waterfall', detail: '500 scalini giù, cascata di 50m verticali, poca gente. Spruzzi, freddo, magia', tag: '20k IDR · 💦' },
+      { time: '10:30', action: 'Risalita + colazione', detail: 'Warung sopra la cascata' },
+      { time: '12:00', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'NungNung > Tegenungan: più alta, meno gente, più vera. Plaga è LA zona meno turistica del centro Bali. Combo perfetto.', cost: '~70k IDR' },
+  { id: 'it-21', name: 'Triple cascate Ubud', type: 'morning', emoji: '💦', gradient: 2, duration: '7h', leaveBy: '06:00', backBy: '13:00', drive: 80, difficulty: 'medium', tagline: 'Kanto Lampo + Tegenungan + Tukad Cepung', rating: 4.7,
+    stops: [
+      { time: '06:00', action: 'Parti', detail: 'Verso Sukawati area' },
+      { time: '07:30', action: 'Tegenungan', detail: 'La classica. Vai presto, alle 9 è invasa', tag: '20k IDR · 💦' },
+      { time: '09:00', action: 'Kanto Lampo', detail: '"Cascata a scale" sulla roccia, iconica per le foto. Aspetta il turno', tag: '15k IDR · 💦' },
+      { time: '10:30', action: 'Tukad Cepung', detail: 'In una caverna. SOLO prima delle 11 per i raggi di sole verticali', tag: '15k IDR · 💦' },
+      { time: '12:00', action: 'Pranzo Ubud', detail: 'Warung local' },
+      { time: '13:00', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'Tre vibe diversi (potente, fotografica, in caverna). Tutte vicine. Tukad Cepung ha luce ottimale solo 9-11.', cost: '~120k IDR' },
+
+  // ========== SUD BALI (Bukit Peninsula) ==========
+  { id: 'it-22', name: 'Uluwatu full day + Kecak + Jimbaran', type: 'fullday', emoji: '🔥', gradient: 1, duration: '10h', leaveBy: '11:00', backBy: '22:00', drive: 70, difficulty: 'medium', tagline: 'Scogliere, surf, danza del fuoco, pesce sulla brace', rating: 4.9,
+    stops: [
+      { time: '11:00', action: 'Parti Canggu', detail: 'Attraversi tutto Bali, traffico sopporta' },
+      { time: '12:30', action: 'Padang Padang Beach', detail: 'Accesso tra rocce, pranzo + bagno', tag: '15k IDR · 🏖️' },
+      { time: '14:30', action: 'Suluban / Blue Point', detail: 'Single Fin per drink, vista sui surfer dal scogliera' },
+      { time: '16:30', action: 'Pura Luhur Uluwatu', detail: 'Tempio sul precipizio 70m + scimmie LADRE (occhiali in tasca!)', tag: '50k IDR · ⛩️' },
+      { time: '18:00', action: 'Kecak Dance', detail: 'Sul precipizio al tramonto. 70 uomini in cerchio attorno al fuoco. Ipnotico, vai prima per posto frontale', tag: '150k IDR · 🔥' },
+      { time: '19:30', action: 'Jimbaran Bay', detail: 'BBQ pesce su tavoli nella sabbia. Menega o Bamboo Cafe', tag: '~250k cena · 🍤' },
+      { time: '22:00', action: 'Rientro', detail: 'Lunga ma in scia di tramonto' },
+    ],
+    why: 'LA giornata vetrina di Bali. Funziona solo sabato (torni tardi). Il Kecak al tramonto è UNICO al mondo. Non saltarlo.', cost: '~700k IDR' },
+  { id: 'it-23', name: 'Bingin + Nyang Nyang + Melasti', type: 'fullday', emoji: '🏖️', gradient: 8, duration: '8h', leaveBy: '08:00', backBy: '17:00', drive: 75, difficulty: 'medium', tagline: 'Le spiagge segrete del Bukit', rating: 4.8,
+    stops: [
+      { time: '08:00', action: 'Parti', detail: 'Verso Pecatu' },
+      { time: '09:30', action: 'Bingin Beach', detail: 'Discesa a piedi tra ville. Surf, warung sulla sabbia, vibe rilassata', tag: '5k IDR · 🏖️' },
+      { time: '12:00', action: 'Nyang Nyang', detail: '500 scalini giù: spiaggia infinita quasi vuota. Solitudine vera', tag: '20k IDR · 🏖️' },
+      { time: '14:30', action: 'Melasti Beach', detail: 'Discesa con strada scolpita nella scogliera bianca, acqua turchese', tag: '10k IDR · 🏖️' },
+      { time: '16:00', action: 'Pranzo tardivo / drink', detail: 'Vincent o La Brisa Uluwatu' },
+      { time: '17:00', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'Le spiagge che non sono "Padang Padang". Nyang Nyang è la più solitaria di Bali. Bingin ha il miglior vibe surf. Melasti è l\'Instagram.', cost: '~200k IDR' },
+
+  // ========== ESPERIENZE ==========
+  { id: 'it-24', name: 'Cooking class Paon Bali', type: 'experience', emoji: '👨‍🍳', gradient: 3, duration: '6h', leaveBy: '07:30', backBy: '13:30', drive: 75, difficulty: 'easy', tagline: 'Compri al mercato, cucini 6 piatti, mangi', rating: 4.9,
+    stops: [
+      { time: '07:30', action: 'Parti per Laplapan (Ubud)', detail: 'Indirizzo Paon Bali Cooking Class' },
+      { time: '08:30', action: 'Mercato locale', detail: 'Guidi tra le bancarelle: cocco, spezie, sambal, ti spiegano tutto' },
+      { time: '09:30', action: 'Casa della famiglia Wayan', detail: 'Giardino delle spezie + tour. Dimostrazione tecnica' },
+      { time: '10:00', action: 'Cooking 6 piatti', detail: 'Nasi goreng, sate lilit, sayur urab, sambal matah, base genep, pisang goreng', tag: '450k IDR · 👨‍🍳' },
+      { time: '12:30', action: 'Pranzo + ricettario', detail: 'Mangi quello che hai fatto. Ti danno il libretto.' },
+      { time: '13:30', action: 'Rientro', detail: 'Casa per lavoro' },
+    ],
+    why: 'Le cooking class normali sono assemblati turistici. Paon è una FAMIGLIA da 3 generazioni. Cucini per davvero CON loro, non davanti a loro.', cost: '~500k IDR' },
+  { id: 'it-25', name: 'Yoga Barn Ubud + colazione', type: 'experience', emoji: '🧘', gradient: 4, duration: '5h', leaveBy: '06:30', backBy: '12:00', drive: 75, difficulty: 'easy', tagline: '1.5h di yoga vera in sala aperta sulla giungla', rating: 4.8,
+    stops: [
+      { time: '06:30', action: 'Parti Canggu', detail: 'Verso Ubud' },
+      { time: '08:00', action: 'Yoga Barn classe Hatha', detail: 'Prenota online (drop-in 130k). Sale in legno aperte, insegnanti tosti', tag: '130k IDR · 🧘' },
+      { time: '09:30', action: 'Garden Cafe Yoga Barn', detail: 'Smoothie bowl + caffè di specialità + uova' },
+      { time: '11:00', action: 'Campuhan Ridge', detail: 'Camminata digestiva sul crinale (facoltativo)' },
+      { time: '12:00', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'Yoga Barn è iconico ma reale. La sala "Old Studio" tutta legno + tetto aperto + grilli + uccelli è il motivo per cui Ubud è capitale yoga.', cost: '~220k IDR' },
+  { id: 'it-26', name: 'Coffee plantation + luwak', type: 'experience', emoji: '☕', gradient: 4, duration: '4-5h', leaveBy: '08:00', backBy: '13:00', drive: 75, difficulty: 'easy', tagline: 'Vedi come si fa il caffè + degusti 12 tipi', rating: 4.4,
+    stops: [
+      { time: '08:00', action: 'Parti', detail: 'Verso Tegallalang' },
+      { time: '09:30', action: 'Bali Pulina', detail: 'Una delle piantagioni "etiche": civet trattate ok, non chiuse 24/7' },
+      { time: '10:00', action: 'Tour processo', detail: 'Vedi pianta, fermentazione, tostatura, mortaio' },
+      { time: '10:45', action: 'Degustazione', detail: '12 tè e caffè (ginger, lemongrass, cocoa, vanilla). Luwak 50k extra', tag: '50-100k IDR · ☕' },
+      { time: '12:00', action: 'Pranzo vista risaie', detail: 'Mai Mai Restaurant o simile' },
+      { time: '13:00', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'Setup ma trasparente. Pulina o Satria sono "i buoni". Evita posti dove le civet sono in gabbie strette: dì NO al luwak in quei casi.', cost: '~250k IDR' },
+  { id: 'it-27', name: 'Silver smithing Celuk', type: 'experience', emoji: '💍', gradient: 5, duration: '5h', leaveBy: '09:00', backBy: '15:00', drive: 60, difficulty: 'easy', tagline: 'Crei il tuo anello in argento da zero', rating: 4.7,
+    stops: [
+      { time: '09:00', action: 'Parti Canggu', detail: 'Verso Celuk (sotto Ubud)' },
+      { time: '10:00', action: 'Celuk Studio (es. Pande Silver)', detail: 'Capitale balinese del silver smithing. Maestri 4-5 generazioni' },
+      { time: '10:30', action: 'Workshop 2h', detail: 'Disegni, fondi argento, modelli, lucidi. Esci con il tuo pezzo', tag: '450k IDR · 💍' },
+      { time: '12:30', action: 'Pranzo Sukawati', detail: 'Babi guling locale o nasi campur' },
+      { time: '13:30', action: 'Pasar Sukawati', detail: 'Mercato dell\'artigianato. CONTRATTA HARD: parti da 30% del prezzo offerto' },
+      { time: '15:00', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'Souvenir VERO che hai fatto tu. Tutta Bali compra l\'argento a Celuk. Pasar Sukawati è dove i resort comprano: prezzi sono 1/5 di Seminyak.', cost: '~600k IDR' },
+
+  // ========== TEMPLI ICONICI ==========
+  { id: 'it-28', name: 'Tirta Empul melukat + Saraswati sera', type: 'morning', emoji: '💧', gradient: 1, duration: '12h', leaveBy: '05:30', backBy: '21:30', drive: 90, difficulty: 'medium', tagline: 'Purificazione alba + danza Kecak al loto', rating: 4.9,
+    stops: [
+      { time: '05:30', action: 'Parti Canggu', detail: '' },
+      { time: '07:30', action: 'Tirta Empul', detail: 'Rituale Melukat: 13 fontane sacre, vesti sarong bianco. Anche tu puoi farlo, niente fake', tag: '50k + 100k · 💧' },
+      { time: '10:00', action: 'Gunung Kawi', detail: 'Santuari scavati nella roccia + risaie. 300 scalini' },
+      { time: '12:00', action: 'Pranzo Tegallalang', detail: 'Risaie vista caffè' },
+      { time: '14:00', action: 'Riposo Ubud', detail: 'Caffè, Periplus libreria, Ubud Palace' },
+      { time: '18:00', action: 'Cena warung', detail: 'Warung Biah Biah o Hujan Locale' },
+      { time: '19:00', action: 'Saraswati Temple — danza', detail: 'Kecak o Legong sul stagno di loto. Più intimo di Uluwatu', tag: '100k IDR · 🔥' },
+      { time: '20:30', action: 'Rientro lento', detail: 'Casa' },
+    ],
+    why: 'Giornata "spirituale" full-day. Melukat è REALE, profondo. Saraswati Kecak con loto fiorito = magia.', cost: '~450k IDR' },
+
+  // ========== WEEKEND EXTRA ==========
+  { id: 'it-29', name: 'Lovina + delfini alba', type: 'weekend', emoji: '🐬', gradient: 6, duration: '1 notte', nights: 1, leaveBy: 'Ven 14:00', backBy: 'Sab sera', drive: 150, difficulty: 'medium', tagline: 'Alba in barca + cliff jumping cascate', rating: 4.6,
+    stops: [
+      { time: 'VEN 14:00', action: 'Parti Canggu', detail: 'Via Bedugul (montagna fresca)' },
+      { time: 'VEN 18:00', action: 'Lovina', detail: 'Spiaggia di sabbia nera vulcanica, calma. Check-in (Lovina Beach Resort)' },
+      { time: 'VEN sera', action: 'Cena porto', detail: 'Pesce alla griglia su tavoli affacciati al mare' },
+      { time: 'SAB 05:30', action: 'Barca dei delfini', detail: '2h al largo, branchi 50-200 esemplari. Stagione perfetta', tag: '200k IDR · 🐬' },
+      { time: 'SAB 09:00', action: 'Aling-Aling Waterfall', detail: 'Cliff jumping 5m-10m-15m (con guida), slide naturali', tag: '125k IDR · 🪂' },
+      { time: 'SAB 12:00', action: 'Pranzo Munduk', detail: 'Sulla strada di rientro' },
+      { time: 'SAB 14:00', action: 'Banjar Hot Springs', detail: '3 vasche sulfuree calde, fontane scolpite' },
+      { time: 'SAB 16:00', action: 'Rientro via Bedugul', detail: 'Strada lunga ma scenografica' },
+      { time: 'SAB 19:30', action: 'Canggu', detail: 'Casa' },
+    ],
+    why: 'Lovina è il "no-Bali" tranquillo del nord. Delfini all\'alba sono garantiti (gennaio-agosto). Aling Aling cliff jumping = adrenalina vera.', cost: '~900k IDR' },
+  { id: 'it-30', name: 'Nusa Lembongan + Ceningan (1N)', type: 'weekend', emoji: '🏝️', gradient: 8, duration: '1 notte', nights: 1, leaveBy: 'Sab 07:00', backBy: 'Dom sera', drive: 30, difficulty: 'easy', tagline: 'Sorella chill di Penida, snorkeling con manta', rating: 4.7,
+    stops: [
+      { time: 'SAB 07:00', action: 'Sanur port', detail: 'Da Canggu 1h. Parcheggio moto' },
+      { time: 'SAB 08:30', action: 'Fast boat Scoot Cruise', detail: '30 min, fast & smooth', tag: '350k a/r · ⛴️' },
+      { time: 'SAB 09:30', action: 'Homestay Lembongan', detail: 'Check-in Sandy Bay o Coconut Beach' },
+      { time: 'SAB 11:00', action: 'Snorkeling tour 4-spot', detail: 'Manta Point, Crystal Bay, Mangrove, Wall. 4h, garantite mante (maggio-ottobre)', tag: '500k IDR · 🐠' },
+      { time: 'SAB 17:00', action: 'Devil\'s Tear', detail: 'Scogliere dove le onde esplodono. Tramonto epico' },
+      { time: 'SAB 19:00', action: 'Cena Mahana Point', detail: 'Tramonto + drink + cena fresca' },
+      { time: 'DOM 07:00', action: 'Yellow Bridge', detail: 'A piedi: passi su Nusa Ceningan' },
+      { time: 'DOM 08:00', action: 'Mahana Point cliff jump', detail: '7m e 13m da rocce vere. Solo se sai cosa fai' },
+      { time: 'DOM 10:30', action: 'Brunch Mushroom Beach', detail: 'Acai bowls + uova' },
+      { time: 'DOM 14:00', action: 'Fast boat rientro', detail: '' },
+      { time: 'DOM 16:00', action: 'Canggu', detail: 'Casa, doccia' },
+    ],
+    why: 'Penida è epica ma stancante. Lembongan è CHILL: scooter, bici, niente folla, snorkeling top, mante garantite. Weekend rigenerativo.', cost: '~1.4M IDR' },
+  { id: 'it-31', name: 'West Bali NP + Pemuteran (2N)', type: 'weekend', emoji: '🐢', gradient: 4, duration: '2 notti', nights: 2, leaveBy: 'Ven 13:00', backBy: 'Dom sera', drive: 180, difficulty: 'medium', tagline: 'La Bali che nessuno conosce + diving Menjangan', rating: 4.8,
+    stops: [
+      { time: 'VEN 13:00', action: 'Parti Canggu', detail: 'Verso nord-ovest estremo' },
+      { time: 'VEN 16:30', action: 'Pemuteran', detail: 'Paesino slow del nord-ovest. Check-in Reef Seen o Adi Assri' },
+      { time: 'VEN sera', action: 'Cena reef BBQ', detail: 'Pesce fresco su tavoli sulla sabbia' },
+      { time: 'SAB 07:00', action: 'Menjangan Island', detail: 'Boat 30 min. Diving o snorkeling: pareti verticali, tartarughe', tag: '700k tour · 🐠' },
+      { time: 'SAB 12:00', action: 'Pranzo isola', detail: 'Picnic balinese sulla spiaggia' },
+      { time: 'SAB 14:00', action: 'Pemuteran biorock', detail: 'Reef restaurato con corrente elettrica, super colorato' },
+      { time: 'SAB tramonto', action: 'Molo Pemuteran', detail: 'Drink + tramonto su mare calmo' },
+      { time: 'DOM 06:00', action: 'Birdwatching West Bali NP', detail: 'Jalak Bali (uccello endemico raro), ranger guide' },
+      { time: 'DOM 10:00', action: 'Pranzo + rientro', detail: 'Via via Singaraja' },
+      { time: 'DOM 16:00', action: 'Canggu', detail: 'Casa' },
+    ],
+    why: 'Pemuteran è dove Bali era 30 anni fa. Diving Menjangan = wall dive con visibilità 40m. Zero folla, zero stress, zero Instagram.', cost: '~2M IDR' },
+
+  // ========== CIBO ICONICO ==========
+  { id: 'it-32', name: 'Jimbaran sunset BBQ pesce', type: 'food', emoji: '🍤', gradient: 7, duration: '4h', leaveBy: '17:00', backBy: '21:30', drive: 35, difficulty: 'easy', tagline: 'Pesce sulla brace, piedi sulla sabbia, tramonto', rating: 4.5,
+    stops: [
+      { time: '17:00', action: 'Parti', detail: 'Verso aeroporto/Jimbaran' },
+      { time: '17:45', action: 'Jimbaran Bay', detail: 'Menega Cafe o Bamboo Cafe (i due classici)' },
+      { time: '18:00', action: 'Tavola nella sabbia', detail: 'Drink al cocco, piedi nudi, gamberi sulla griglia' },
+      { time: '19:00', action: 'BBQ pesce intero', detail: 'Pesce + gamberoni + calamari + nasi (~250k a testa)', tag: '~250k · 🍤' },
+      { time: '20:30', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'Cliché ma giustificato. Vai in settimana (martedì-mercoledì meno folla). Foto da fare per gli amici a casa.', cost: '~300k IDR' },
+  { id: 'it-33', name: 'Babi guling Ibu Oka (Ubud)', type: 'food', emoji: '🐖', gradient: 7, duration: '4h', leaveBy: '11:00', backBy: '15:00', drive: 75, difficulty: 'easy', tagline: 'Il maiale arrosto che Bourdain ha amato', rating: 4.6,
+    stops: [
+      { time: '11:00', action: 'Parti', detail: 'Verso Ubud' },
+      { time: '12:30', action: 'Ibu Oka 3 (Tegal Sari)', detail: 'La sede meno turistica delle 3. Le altre sono in centro' },
+      { time: '12:45', action: 'Babi guling speciale', detail: '75k: maiale arrosto + sambal matah + sayur + krupuk + nasi', tag: '75k · 🐖' },
+      { time: '14:00', action: 'Ubud Palace + market', detail: 'Camminata digestiva' },
+      { time: '15:00', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'IL piatto cerimoniale balinese. Finisce verso le 14:30, vai presto. Special (con sangue cotto e intestino) è autentico, vai sull\'altro se sei delicato.', cost: '~150k IDR' },
+  { id: 'it-34', name: 'Bebek Bengil (Dirty Duck Ubud)', type: 'food', emoji: '🦆', gradient: 3, duration: '3h', leaveBy: '18:00', backBy: '22:00', drive: 75, difficulty: 'easy', tagline: 'Anatra croccante 36h marinata in giardino', rating: 4.4,
+    stops: [
+      { time: '18:00', action: 'Parti', detail: 'Verso Ubud' },
+      { time: '19:30', action: 'Bebek Bengil', detail: 'Gazebo nelle risaie illuminate. Atmosfera incredibile' },
+      { time: '19:45', action: 'Crispy duck speciale', detail: 'Anatra fritta + sambal matah + sayur + nasi (~250k)', tag: '~250k · 🦆' },
+      { time: '21:30', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'Anatra fritta marinata 36 ore in spezie. Touristy ma il piatto è IL loro: viene in tutta Bali per averla. Vai al tramonto.', cost: '~300k IDR' },
+
+  // ========== EVENTI CULTURALI ==========
+  { id: 'it-35', name: 'Purnama (luna piena, 1 giugno)', type: 'culture', emoji: '🌕', gradient: 5, duration: '3-4h', leaveBy: '16:00', backBy: '20:00', drive: 10, difficulty: 'easy', tagline: 'Templi in festa per la luna piena', rating: 4.9,
+    stops: [
+      { time: '16:00', action: 'Vesti sarong + scura', detail: 'T-shirt scura, no infradito, mostra rispetto' },
+      { time: '17:00', action: 'Scegli tempio', detail: 'Petitenget (vicino), Tanah Lot (un\'ora), Saraswati Ubud. Tutti in festa' },
+      { time: '17:30', action: 'Osserva', detail: 'Offerte (canang, gebogan torre di frutta), incenso, gamelan dal vivo, donne in kebaya bianca, preghiere collettive' },
+      { time: '18:30', action: 'Distanza rispettosa', detail: 'Non entrare nelle aree sacre senza essere invitato. Le donne avranno mestruazioni? Loro non entrano e nemmeno tu in quel caso' },
+      { time: '19:30', action: 'Casa', detail: 'Hai visto la vera religione viva' },
+    ],
+    why: 'Purnama Sasih Sadha cade il 1 giugno 2026. Luna piena = templi LUMINOSI di offerte. Vita religiosa VERA, non turismo. Sii presente, niente flash.', cost: '~50k offerta opzionale' },
+  { id: 'it-36', name: 'Tilem (luna nuova, 16 giugno)', type: 'culture', emoji: '🌑', gradient: 5, duration: '2-3h', leaveBy: '17:00', backBy: '20:00', drive: 10, difficulty: 'easy', tagline: 'Purificazione collettiva alla luna nuova', rating: 4.7,
+    stops: [
+      { time: '17:00', action: 'Sarong scuro', detail: 'Più sobrio della Purnama' },
+      { time: '17:30', action: 'Tempio locale', detail: 'Petitenget, Batu Bolong o Saraswati. Meno spettacolare di Purnama ma più mistico' },
+      { time: '18:00', action: 'Osserva', detail: 'Cerimonie di purificazione dalle energie negative. Acqua benedetta, riso bagnato sulla fronte' },
+      { time: '19:00', action: 'Casa', detail: '' },
+    ],
+    why: 'Tilem = giorno di pulizia spirituale. Meno fotogenico ma molto autentico. Se sei a Bali in quel giorno NON dovresti perderlo.', cost: '~30k offerta opzionale' },
+
+  // ========== CULTURA & DANZE ==========
+  { id: 'it-37', name: 'Kecak Uluwatu (solo danza)', type: 'culture', emoji: '🔥', gradient: 1, duration: '5h', leaveBy: '15:00', backBy: '20:00', drive: 70, difficulty: 'easy', tagline: 'Una delle danze più potenti al mondo', rating: 4.9,
+    stops: [
+      { time: '15:00', action: 'Parti', detail: 'Verso Bukit' },
+      { time: '16:30', action: 'Arrivo Uluwatu', detail: 'Compra biglietto Kecak + tempio (paghi 150k Kecak, 50k tempio)' },
+      { time: '17:00', action: 'Posizione frontale', detail: 'Arriva PRESTO. Posti a sedere su gradini di pietra' },
+      { time: '18:00', action: 'Kecak dance', detail: '70 uomini in cerchio, "cak cak cak" ipnotico, Ramayana + fuoco. Tramonto dietro', tag: '150k IDR · 🔥' },
+      { time: '19:30', action: 'Cena warung Ungasan', detail: 'O drink al Single Fin' },
+      { time: '20:00', action: 'Rientro', detail: 'Casa' },
+    ],
+    why: 'La danza più iconica di Bali e probabilmente al mondo. NON è folclore turistico: è rituale serio. Uluwatu al tramonto = setting unico.', cost: '~250k IDR' },
 ];
 
 const diffMap = { easy: { label: 'Facile', emoji: '🟢' }, medium: { label: 'Medio', emoji: '🟡' }, hard: { label: 'Tosto', emoji: '🔴' } };
@@ -265,8 +573,12 @@ function App() {
 
   const filtered = useMemo(() => {
     if (filter === 'all') return itineraries;
-    if (filter === 'morning') return itineraries.filter(i => i.type === 'morning');
+    if (filter === 'quick') return itineraries.filter(i => i.type === 'quick');
+    if (filter === 'morning') return itineraries.filter(i => i.type === 'morning' || i.type === 'fullday');
     if (filter === 'weekend') return itineraries.filter(i => i.type === 'weekend');
+    if (filter === 'experience') return itineraries.filter(i => i.type === 'experience');
+    if (filter === 'food') return itineraries.filter(i => i.type === 'food');
+    if (filter === 'culture') return itineraries.filter(i => i.type === 'culture');
     if (filter === 'todo') return itineraries.filter(i => !completed[i.id]);
     if (filter === 'easy') return itineraries.filter(i => i.difficulty === 'easy');
     return itineraries;
@@ -275,12 +587,17 @@ function App() {
   const todayRec = useMemo(() => {
     const now = new Date(); const day = now.getDay(); const hour = now.getHours();
     const dayName = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'][day];
-    const isWeekend = day === 5 || day === 6 || day === 0;
-    if (isWeekend) return { day: dayName, msg: 'È weekend, giornata piena 🎉', sub: 'Hai tempo per un trip lungo. Ecco i migliori weekend disponibili.', emoji: '🌴', recs: itineraries.filter(i => i.type === 'weekend' && !completed[i.id]).slice(0, 3) };
-    if (hour >= 13) return { day: dayName, msg: 'Lavoro time 💻', sub: 'Tardi per uscire. Pianifica domani mattina, sveglia presto.', emoji: '🌙', recs: itineraries.filter(i => i.type === 'morning' && !completed[i.id]).slice(0, 3) };
-    if (hour < 6) return { day: dayName, msg: 'Sveglia perfetta ☀️', sub: 'Sei in tempo per qualsiasi mattina. Parti adesso, eviti traffico e caldo.', emoji: '🌅', recs: itineraries.filter(i => i.type === 'morning' && !completed[i.id]).slice(0, 4) };
+    const isSat = day === 6;
+    const isSun = day === 0;
+    const isFri = day === 5;
+    if (isSat) return { day: dayName, msg: 'Sabato libero, daje 🎉', sub: 'Giornata intera. Weekend trip, fullday Bukit, o esperienza più cibo iconico.', emoji: '🌴', recs: itineraries.filter(i => ['weekend','fullday'].includes(i.type) && !completed[i.id]).slice(0, 4) };
+    if (isSun) return { day: dayName, msg: 'Domenica, ritmo lento 🌿', sub: 'Esperienze, mercati, cibo. Riposa o chiusura del weekend.', emoji: '🍃', recs: itineraries.filter(i => ['experience','food','quick','culture'].includes(i.type) && !completed[i.id]).slice(0, 4) };
+    if (isFri && hour >= 13) return { day: dayName, msg: 'Venerdì pomeriggio — pronti?', sub: 'Tra poche ore puoi partire per un weekend trip. Prenota subito.', emoji: '🚀', recs: itineraries.filter(i => i.type === 'weekend' && !completed[i.id]).slice(0, 3) };
+    if (hour >= 17) return { day: dayName, msg: 'Sera libera 🌃', sub: 'Cibo iconico, tramonto vicino casa, night market.', emoji: '🍻', recs: itineraries.filter(i => (i.type === 'food' || (i.type === 'quick' && (i.leaveBy || '').startsWith('17') )) && !completed[i.id]).slice(0, 4) };
+    if (hour >= 13) return { day: dayName, msg: 'Lavoro time 💻', sub: 'Tardi per uscire. Pianifica domani mattina, sveglia presto.', emoji: '🌙', recs: itineraries.filter(i => ['morning','quick'].includes(i.type) && !completed[i.id]).slice(0, 3) };
+    if (hour < 6) return { day: dayName, msg: 'Sveglia perfetta ☀️', sub: 'Sei in tempo per qualsiasi mattina. Parti adesso, eviti traffico e caldo.', emoji: '🌅', recs: itineraries.filter(i => ['morning','quick'].includes(i.type) && !completed[i.id]).slice(0, 4) };
     const left = 13 - hour;
-    return { day: dayName, msg: `Hai ~${left}h prima del rientro`, sub: 'Trip vicini a Canggu, niente di troppo lungo.', emoji: '⏰', recs: itineraries.filter(i => i.type === 'morning' && !completed[i.id] && i.drive <= left * 30).slice(0, 4) };
+    return { day: dayName, msg: `Hai ~${left}h prima del rientro`, sub: 'Trip vicini a Canggu, niente di troppo lungo.', emoji: '⏰', recs: itineraries.filter(i => ['quick','morning'].includes(i.type) && !completed[i.id] && i.drive <= left * 30).slice(0, 4) };
   }, [completed]);
 
   const openIt = itineraries.find(i => i.id === openId);
@@ -306,7 +623,17 @@ function App() {
     ),
     tab === 'explore' && h(React.Fragment, null,
       h('div', { className: 'filters' },
-        [{ id: 'all', label: 'Tutto', emoji: '✨' }, { id: 'morning', label: 'Mattine', emoji: '☀️' }, { id: 'weekend', label: 'Weekend', emoji: '🌅' }, { id: 'easy', label: 'Facile', emoji: '🟢' }, { id: 'todo', label: 'Da fare', emoji: '📌' }].map(f =>
+        [
+          { id: 'all', label: 'Tutto', emoji: '✨' },
+          { id: 'todo', label: 'Da fare', emoji: '📌' },
+          { id: 'quick', label: 'Vicino Canggu', emoji: '🛵' },
+          { id: 'morning', label: 'Mattine', emoji: '☀️' },
+          { id: 'weekend', label: 'Weekend', emoji: '🌅' },
+          { id: 'experience', label: 'Esperienze', emoji: '✋' },
+          { id: 'food', label: 'Cibo & sera', emoji: '🍜' },
+          { id: 'culture', label: 'Cultura', emoji: '🪔' },
+          { id: 'easy', label: 'Facile', emoji: '🟢' }
+        ].map(f =>
           h('button', { key: f.id, className: `pill ${filter === f.id ? 'active' : ''}`, onClick: () => setFilter(f.id) },
             h('span', { className: 'pill-emoji' }, f.emoji), f.label
           )
@@ -336,7 +663,15 @@ function Card({ it, done, onOpen, onToggle }) {
   return h('div', { className: `card ${done ? 'done' : ''}`, onClick: onOpen },
     h('div', { className: `card-hero gradient-${it.gradient}` },
       h('div', { className: 'card-hero-bg' }, it.emoji),
-      h('div', { className: 'card-badge' }, it.type === 'morning' ? '☀️ Mattina' : `🌅 ${it.nights}N Weekend`),
+      h('div', { className: 'card-badge' },
+        it.type === 'morning' ? '☀️ Mattina' :
+        it.type === 'quick' ? '🛵 Vicino casa' :
+        it.type === 'experience' ? '✋ Esperienza' :
+        it.type === 'food' ? '🍜 Cibo' :
+        it.type === 'culture' ? '🪔 Cultura' :
+        it.type === 'fullday' ? '🌞 Tutto il giorno' :
+        `🌅 ${it.nights}N Weekend`
+      ),
       h('button', { className: `card-fav ${done ? 'done' : ''}`, onClick: onToggle }, done ? '✓' : '♡')
     ),
     h('div', { className: 'card-content' },
@@ -391,22 +726,38 @@ function Sheet({ it, onClose, done, onToggle }) {
 
 function PlanView({ completed, setCompleted, onOpen }) {
   const weeks = [
-    { n: 1, title: 'Adattamento', sub: 'Tieni breve, no trip lunghi', mornings: ['it-1'], weekend: 'it-5', note: 'Hai cambiato fuso e clima. Una mattina sola di esplorazione, il weekend lo dedichi al nord che è la zona più "wow" e meno faticosa.' },
-    { n: 2, title: 'Cultura Ubud', sub: 'Templi e risaie classiche', mornings: ['it-3', 'it-2'], weekend: 'it-6', note: 'Settimana centrale, sei in pieno ritmo. Due mattine ambiziose verso Ubud + weekend a Sidemen per la costa est.' },
-    { n: 3, title: 'Slow + vulcano', sub: 'Mattine corte, weekend epico', mornings: ['it-4'], weekend: 'it-7', note: 'Dopo due weekend pieni serve recupero. Una mattina lunga (Jatiluwih), poi alba sul vulcano: una notte sola.' },
-    { n: 4, title: 'Chiusura', sub: 'Quello che è rimasto', mornings: [], weekend: 'it-8', note: 'Ultimi giorni. Recuperi quello che hai saltato. Nusa Penida opzionale.' },
+    { n: 1, title: 'Adattamento + Purnama', sub: '27 mag → 2 giu · luna piena 1/6',
+      quicks: ['it-9', 'it-11'], mornings: ['it-1', 'it-14'], weekend: 'it-5', culture: ['it-35'], food: [], experiences: [],
+      note: 'Settimana di acclimatamento. Una mattina vicino casa (Pasar Tibubeneng), una più sostanziosa (Tanah Lot o Pasar Ubud). Weekend Munduk (fresco, riposi). MARTEDÌ 2 giugno = PURNAMA: vai in un tempio nel pomeriggio, è la cosa più "vera" che farai.' },
+    { n: 2, title: 'Cultura Ubud + Est', sub: '3 → 9 giu',
+      quicks: ['it-13', 'it-12'], mornings: ['it-3', 'it-21'], weekend: 'it-6', culture: [], food: ['it-16'], experiences: ['it-24'],
+      note: 'In pieno ritmo. Due mattine Ubud (Tirta Empul + tris di cascate), weekend Sidemen+Amed. Una sera Gianyar night market, una cooking class. Mattino: Pasar Badung Denpasar.' },
+    { n: 3, title: 'Sud + vulcano + Tilem', sub: '10 → 16 giu · luna nuova 16/6',
+      quicks: ['it-10'], mornings: ['it-18', 'it-20'], weekend: 'it-7', culture: ['it-36'], food: ['it-32'], experiences: ['it-25'],
+      note: 'Settimana epica. SABATO fullday Uluwatu (vedi sotto). Weekend Mt Batur (1 notte). Penglipuran villaggio Bali Aga. Surf lesson casa. MARTEDÌ 16 giugno = TILEM. Yoga Barn nel mezzo per recuperare.' },
+    { n: 4, title: 'Chiusura — isole + babi', sub: '17 → 23 giu · ultimo volo 24/6',
+      quicks: ['it-15'], mornings: ['it-4'], weekend: 'it-30', culture: ['it-37'], food: ['it-33', 'it-34'], experiences: ['it-27'],
+      note: 'Ultima settimana. Weekend Nusa Lembongan (più chill di Penida). Babi guling, bebek bengil. Silver smithing per souvenir vero. Kecak Uluwatu (anche solo la danza) e poi via.' },
   ];
+  const listIds = (ids, label, icon) => ids && ids.length > 0 && h(React.Fragment, null,
+    h('div', { className: 'week-list-title' }, icon + ' ' + label),
+    ids.map(id => {
+      const it = itineraries.find(x => x.id === id);
+      if (!it) return null;
+      return h('div', { key: id, className: `week-list-item ${completed[id] ? 'done' : ''}`, onClick: () => onOpen(id) }, h('span', { className: 'emoji' }, it.emoji), it.name, completed[id] && ' ✓');
+    })
+  );
   return h('div', { className: 'content' },
     weeks.map(w => h('div', { key: w.n, className: 'week-card' },
       h('div', { className: 'week-header' }, h('div', { className: 'week-num' }, w.n), h('div', { className: 'week-title' }, w.title)),
       h('div', { className: 'week-sub' }, w.sub),
       h('div', { className: 'week-note' }, w.note),
-      w.mornings.length > 0 && h(React.Fragment, null,
-        h('div', { className: 'week-list-title' }, '☀️ Mattine'),
-        w.mornings.map(id => { const it = itineraries.find(x => x.id === id); return h('div', { key: id, className: `week-list-item ${completed[id] ? 'done' : ''}`, onClick: () => onOpen(id) }, h('span', { className: 'emoji' }, it.emoji), it.name, completed[id] && ' ✓'); })
-      ),
-      h('div', { className: 'week-list-title' }, '🌅 Weekend'),
-      (() => { const it = itineraries.find(x => x.id === w.weekend); return h('div', { className: `week-list-item ${completed[w.weekend] ? 'done' : ''}`, onClick: () => onOpen(w.weekend) }, h('span', { className: 'emoji' }, it.emoji), it.name, completed[w.weekend] && ' ✓'); })()
+      listIds(w.quicks, 'Vicino Canggu', '🛵'),
+      listIds(w.mornings, 'Mattine', '☀️'),
+      w.weekend && (() => { const it = itineraries.find(x => x.id === w.weekend); return h(React.Fragment, null, h('div', { className: 'week-list-title' }, '🌅 Weekend'), h('div', { className: `week-list-item ${completed[w.weekend] ? 'done' : ''}`, onClick: () => onOpen(w.weekend) }, h('span', { className: 'emoji' }, it.emoji), it.name, completed[w.weekend] && ' ✓')); })(),
+      listIds(w.experiences, 'Esperienze', '✋'),
+      listIds(w.food, 'Cibo & sera', '🍜'),
+      listIds(w.culture, 'Cultura / cerimonia', '🪔')
     ))
   );
 }
