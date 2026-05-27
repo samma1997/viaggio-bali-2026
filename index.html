@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FF385C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Bali">
+<title>Bali · Luca's Trip</title>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌴</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23FF385C'/><text x='50' y='72' font-size='65' text-anchor='middle'>🌴</text></svg>">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { background: #fff; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: #222; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom); min-height: 100vh; }
+.header { padding: 16px 20px 14px; padding-top: calc(env(safe-area-inset-top) + 12px); background: #fff; border-bottom: 1px solid #ebebeb; position: sticky; top: 0; z-index: 100; }
+.header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: #FF385C; }
+.logo-emoji { font-size: 26px; }
+.day-counter { background: #f7f7f7; border-radius: 100px; padding: 6px 12px; font-size: 12px; font-weight: 600; color: #717171; display: flex; align-items: center; gap: 6px; }
+.day-counter .num { color: #FF385C; font-weight: 700; }
+.progress-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #717171; margin-bottom: 4px; }
+.progress-row .progress-text { font-weight: 600; color: #222; }
+.progress-bar { flex: 1; height: 6px; background: #ebebeb; border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #FF385C, #FF7B5C); border-radius: 3px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.tabs { display: flex; gap: 6px; padding: 14px 20px 0; overflow-x: auto; background: #fff; position: sticky; top: 95px; z-index: 99; -webkit-overflow-scrolling: touch; border-bottom: 1px solid #ebebeb; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { background: none; border: none; padding: 8px 4px 14px; font-family: inherit; font-size: 14px; font-weight: 600; color: #717171; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; margin-right: 18px; display: flex; align-items: center; gap: 6px; }
+.tab.active { color: #222; border-bottom-color: #222; }
+.tab-emoji { font-size: 18px; }
+.filters { display: flex; gap: 8px; padding: 14px 20px; overflow-x: auto; background: #fff; -webkit-overflow-scrolling: touch; }
+.filters::-webkit-scrollbar { display: none; }
+.pill { background: #fff; border: 1px solid #dddddd; padding: 7px 14px; border-radius: 100px; font-family: inherit; font-size: 13px; font-weight: 500; color: #222; white-space: nowrap; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+.pill:active { transform: scale(0.96); }
+.pill.active { background: #222; color: #fff; border-color: #222; }
+.pill-emoji { font-size: 15px; }
+.content { padding: 8px 20px 40px; }
+.card { background: #fff; border-radius: 16px; overflow: hidden; margin-bottom: 20px; cursor: pointer; transition: transform 0.2s; }
+.card:active { transform: scale(0.99); }
+.card.done .card-content { opacity: 0.55; }
+.card-hero { height: 200px; position: relative; overflow: hidden; border-radius: 16px; }
+.card-hero-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 120px; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15)); }
+.card-hero.gradient-1 { background: linear-gradient(135deg, #FFE5D9 0%, #FFD3B6 100%); }
+.card-hero.gradient-2 { background: linear-gradient(135deg, #D4F1F4 0%, #75E6DA 100%); }
+.card-hero.gradient-3 { background: linear-gradient(135deg, #FFF3B0 0%, #FFCB77 100%); }
+.card-hero.gradient-4 { background: linear-gradient(135deg, #E0F0E3 0%, #A8D8B9 100%); }
+.card-hero.gradient-5 { background: linear-gradient(135deg, #F4D5E5 0%, #E89BCF 100%); }
+.card-hero.gradient-6 { background: linear-gradient(135deg, #D4E4F7 0%, #88B8E0 100%); }
+.card-hero.gradient-7 { background: linear-gradient(135deg, #FFD6E0 0%, #FF6B9D 100%); }
+.card-hero.gradient-8 { background: linear-gradient(135deg, #C9E4FF 0%, #5C9DEF 100%); }
+.card-badge { position: absolute; top: 14px; left: 14px; background: #fff; padding: 5px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; color: #222; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.card-fav { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); width: 36px; height: 36px; border-radius: 50%; border: none; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: #fff; }
+.card-fav.done { background: #FF385C; }
+.card-fav:active { transform: scale(0.9); }
+.card-content { padding: 14px 4px 6px; }
+.card-title-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; gap: 8px; }
+.card-title { font-size: 17px; font-weight: 600; color: #222; line-height: 1.2; flex: 1; }
+.card-rating { font-size: 14px; font-weight: 500; color: #222; display: flex; align-items: center; gap: 3px; flex-shrink: 0; }
+.card-tagline { font-size: 15px; color: #717171; margin-bottom: 6px; line-height: 1.3; }
+.card-meta { font-size: 14px; color: #717171; display: flex; gap: 12px; margin-bottom: 4px; }
+.card-meta span { display: flex; align-items: center; gap: 4px; }
+.card-price { font-size: 14px; color: #222; margin-top: 4px; }
+.card-price strong { font-weight: 700; }
+.sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 200; }
+.sheet-overlay.open { opacity: 1; pointer-events: auto; }
+.sheet { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; border-radius: 24px 24px 0 0; z-index: 201; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.32, 0.72, 0.2, 1.05); max-height: 92vh; display: flex; flex-direction: column; padding-bottom: env(safe-area-inset-bottom); }
+.sheet.open { transform: translateY(0); }
+.sheet-handle { padding: 12px; display: flex; justify-content: center; flex-shrink: 0; }
+.sheet-handle::before { content: ''; width: 36px; height: 4px; background: #d0d0d0; border-radius: 2px; }
+.sheet-content { overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 0 20px 24px; }
+.sheet-hero { height: 220px; border-radius: 20px; margin-bottom: 18px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 140px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2)); }
+.sheet-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 4px; }
+.sheet-tagline { font-size: 16px; color: #717171; margin-bottom: 18px; }
+.stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+.stat-box { background: #f7f7f7; border-radius: 12px; padding: 12px 8px; text-align: center; }
+.stat-emoji { font-size: 24px; display: block; margin-bottom: 4px; }
+.stat-val { font-size: 14px; font-weight: 700; color: #222; }
+.stat-lbl { font-size: 11px; color: #717171; margin-top: 2px; }
+.section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.timeline { margin-bottom: 24px; }
+.timeline-item { display: flex; gap: 14px; position: relative; }
+.timeline-time { flex-shrink: 0; font-size: 12px; font-weight: 700; color: #222; width: 65px; padding-top: 4px; }
+.timeline-marker { flex-shrink: 0; width: 28px; display: flex; flex-direction: column; align-items: center; position: relative; }
+.timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: #FF385C; margin-top: 6px; z-index: 1; border: 3px solid #fff; box-shadow: 0 0 0 1px #FF385C; }
+.timeline-dot.minor { background: #fff; box-shadow: 0 0 0 1.5px #d0d0d0; border-width: 2px; }
+.timeline-line { position: absolute; top: 16px; bottom: -8px; width: 2px; background: #ebebeb; z-index: 0; }
+.timeline-item:last-child .timeline-line { display: none; }
+.timeline-content { flex: 1; padding-bottom: 18px; }
+.timeline-action { font-size: 15px; font-weight: 600; color: #222; margin-bottom: 2px; }
+.timeline-detail { font-size: 14px; color: #717171; line-height: 1.4; }
+.timeline-tag { display: inline-flex; align-items: center; gap: 4px; background: #f7f7f7; padding: 3px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; color: #222; margin-top: 6px; }
+.tip-box { background: linear-gradient(135deg, #FFF5F7 0%, #FFE5EA 100%); border-radius: 14px; padding: 14px 16px; margin-bottom: 16px; border-left: 4px solid #FF385C; }
+.tip-box.green { background: linear-gradient(135deg, #F0F9F4 0%, #DDF1E4 100%); border-left-color: #008A05; }
+.tip-header { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #FF385C; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+.tip-box.green .tip-header { color: #008A05; }
+.tip-text { font-size: 14px; line-height: 1.45; color: #222; }
+.budget-box { background: #f7f7f7; border-radius: 12px; padding: 14px 16px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; }
+.budget-lbl { font-size: 13px; color: #717171; font-weight: 500; }
+.budget-val { font-size: 16px; font-weight: 700; color: #222; }
+.btn-row { display: flex; gap: 10px; margin-bottom: 8px; }
+.btn { flex: 1; padding: 14px; font-family: inherit; font-size: 15px; font-weight: 600; border-radius: 10px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; }
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: linear-gradient(90deg, #FF385C, #FF7B5C); color: #fff; }
+.btn-primary.done { background: #008A05; }
+.btn-secondary { background: #fff; color: #222; border: 1px solid #222; flex: 0 0 auto; padding: 14px 18px; }
+.today-hero { background: linear-gradient(135deg, #FF385C 0%, #FF7B5C 100%); color: #fff; border-radius: 16px; padding: 20px; margin-bottom: 20px; position: relative; overflow: hidden; }
+.today-hero::after { content: ''; position: absolute; right: -30px; top: -30px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%; }
+.today-hero::before { content: ''; position: absolute; right: 30px; bottom: -50px; width: 100px; height: 100px; background: rgba(255,255,255,0.08); border-radius: 50%; }
+.today-day { font-size: 13px; font-weight: 600; opacity: 0.9; margin-bottom: 4px; letter-spacing: 0.02em; text-transform: uppercase; }
+.today-msg { font-size: 22px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; position: relative; z-index: 1; }
+.today-sub { font-size: 14px; opacity: 0.95; line-height: 1.35; position: relative; z-index: 1; }
+.today-emoji { font-size: 38px; position: absolute; top: 16px; right: 18px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+.week-card { background: #fff; border: 1px solid #ebebeb; border-radius: 16px; padding: 18px; margin-bottom: 14px; }
+.week-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.week-num { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #FF385C, #FF7B5C); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; }
+.week-title { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.week-sub { font-size: 13px; color: #717171; margin-bottom: 10px; }
+.week-note { font-size: 14px; color: #444; line-height: 1.45; margin-bottom: 12px; }
+.week-list-title { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #717171; margin: 12px 0 6px; }
+.week-list-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 14px; cursor: pointer; }
+.week-list-item .emoji { font-size: 16px; flex-shrink: 0; }
+.week-list-item.done { text-decoration: line-through; color: #999; }
+.empty { text-align: center; padding: 60px 20px; color: #717171; }
+.empty-emoji { font-size: 60px; margin-bottom: 12px; display: block; }
+.empty-title { font-weight: 700; color: #222; font-size: 18px; margin-bottom: 6px; }
+.empty-sub { font-size: 14px; }
+.install-hint { position: fixed; bottom: 20px; left: 16px; right: 16px; background: #222; color: #fff; border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; z-index: 50; box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+.install-hint .emoji { font-size: 28px; flex-shrink: 0; }
+.install-hint-text { flex: 1; font-size: 13px; line-height: 1.3; }
+.install-hint-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
+.install-hint button { background: none; border: none; color: #999; font-size: 22px; cursor: pointer; padding: 0 4px; }
+.card, .pill, .tab, .btn { user-select: none; -webkit-user-select: none; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="module">
+import React, { useState, useEffect, useMemo } from 'https://esm.sh/react@18';
+import { createRoot } from 'https://esm.sh/react-dom@18/client';
+
+const h = React.createElement;
+const CANGGU = { lat: -8.6478, lng: 115.1385 };
+const END_DATE = new Date('2026-06-24');
+
+const itineraries = [
+  { id: 'it-1', name: 'Tanah Lot + Taman Ayun', type: 'morning', emoji: '⛩️', gradient: 1, duration: '5-6h', leaveBy: '06:00', backBy: '12:30', drive: 50, difficulty: 'easy', tagline: 'Due templi iconici in una mattina', rating: 4.8,
+    stops: [
+      { time: '06:00', action: 'Partenza Canggu', detail: 'Caffè veloce, parti col fresco' },
+      { time: '06:40', action: 'Tanah Lot', detail: 'Tempio sull\'oceano. Marea bassa = scendi sotto. 1h sul posto', tag: '75k IDR · ⛩️' },
+      { time: '08:00', action: 'Colazione', detail: 'Warung locale, nasi campur a 25k' },
+      { time: '09:00', action: 'Taman Ayun', detail: 'Tempio reale con fossato. Niente turisti. 45min', tag: '30k IDR · ⛩️' },
+      { time: '10:30', action: 'Rientro lento', detail: 'Stop a Canggu Sand Bar per coffee + lavoro' },
+    ],
+    why: 'Inizio perfetto. Strade tranquille, zero stress, due posti UNESCO-livello in mezza mattina.', cost: '~150k IDR' },
+  { id: 'it-2', name: 'Cascate Ubud Combo', type: 'morning', emoji: '💦', gradient: 2, duration: '6-7h', leaveBy: '06:30', backBy: '13:30', drive: 85, difficulty: 'medium', tagline: 'Tibumana + Tukad Cepung al volo', rating: 4.7,
+    stops: [
+      { time: '06:30', action: 'Partenza Canggu', detail: 'Verso Ubud, traffico gestibile' },
+      { time: '08:00', action: 'Tibumana Waterfall', detail: 'All\'apertura sei solo. Discesa 10min, swim, foto', tag: '25k IDR · 💦' },
+      { time: '09:30', action: 'Trasferimento', detail: '10min in moto verso Tukad Cepung' },
+      { time: '10:00', action: 'Tukad Cepung', detail: 'OR a quell\'ora i raggi entrano nella caverna. Magia', tag: '15k IDR · 💦' },
+      { time: '11:30', action: 'Pranzo veloce', detail: 'Warung sulla strada del rientro' },
+      { time: '13:30', action: 'Canggu', detail: 'A casa per il lavoro pomeriggio' },
+    ],
+    why: 'Due cascate totalmente diverse (velo vs caverna). Tukad Cepung va fatta SOLO a quell\'ora per la luce.', cost: '~200k IDR' },
+  { id: 'it-3', name: 'Tirta Empul + Tegallalang', type: 'morning', emoji: '🌾', gradient: 3, duration: '7h', leaveBy: '06:00', backBy: '13:00', drive: 90, difficulty: 'medium', tagline: 'Purificazione + risaie classiche', rating: 4.6,
+    stops: [
+      { time: '06:00', action: 'Partenza Canggu', detail: 'Lunga ma vale, parti presto' },
+      { time: '08:00', action: 'Tirta Empul', detail: 'Apertura. Fai il rituale Melukat (100k include sarong)', tag: '50k + 100k · ⛩️' },
+      { time: '10:00', action: 'Trasferimento', detail: '15min verso Tegallalang' },
+      { time: '10:30', action: 'Tegallalang', detail: 'Risaie + caffè con piscina vista', tag: '25k IDR · 🌾' },
+      { time: '12:00', action: 'Pranzo a Ubud', detail: 'Locavore-To-Go o Warung Biah Biah' },
+      { time: '13:00', action: 'Rientro Canggu', detail: 'Traffico Ubud-Canggu è pesante, 1h30' },
+    ],
+    why: 'Il combo "Eat Pray Love" fatto bene. Rituale spirituale autentico + cartolina classica.', cost: '~250k IDR' },
+  { id: 'it-4', name: 'Jatiluwih Solo', type: 'morning', emoji: '🌿', gradient: 4, duration: '7h', leaveBy: '06:00', backBy: '13:00', drive: 105, difficulty: 'medium', tagline: 'Le risaie UNESCO più belle', rating: 4.9,
+    stops: [
+      { time: '06:00', action: 'Partenza Canggu', detail: 'Direzione nord-ovest, salita verso Tabanan' },
+      { time: '07:45', action: 'Arrivo Jatiluwih', detail: 'Scegli il trail lungo, 90min', tag: '40k IDR · 🌾' },
+      { time: '08:00', action: 'Trekking risaie', detail: 'Cammina, fotografa. Il trail attraversa villaggi' },
+      { time: '10:00', action: 'Pranzo con vista', detail: 'Billy\'s Terrace Cafe sul belvedere' },
+      { time: '11:30', action: 'Rientro', detail: 'Possibile stop a Pura Luhur Batukaru' },
+      { time: '13:00', action: 'Canggu', detail: 'A casa per il pomeriggio' },
+    ],
+    why: 'Jatiluwih merita da sola una mattina. Non è "una tappa", è LA tappa.', cost: '~100k IDR' },
+  { id: 'it-5', name: 'Weekend Nord: Munduk', type: 'weekend', emoji: '🏔️', gradient: 6, duration: '2 notti', nights: 2, leaveBy: 'Ven 14:00', backBy: 'Dom sera', drive: 135, difficulty: 'medium', tagline: 'Cascate, lago, aria fresca', rating: 4.9,
+    stops: [
+      { time: 'VEN 14:00', action: 'Parti da Canggu', detail: 'Salita verso Bedugul, fresco appena arrivi' },
+      { time: 'VEN 17:00', action: 'Arrivo Munduk', detail: 'Check-in (Sanak Retreat o Munduk Moding)' },
+      { time: 'SAB 06:00', action: 'Alba a Wanagiri', detail: 'Vista lago Buyan, niente folla', tag: '50k IDR · 🌄' },
+      { time: 'SAB 09:00', action: 'Banyumala Twin', detail: 'Due cascate gemelle. Bagno, foto, 2h', tag: '30k IDR · 💦' },
+      { time: 'SAB 14:00', action: 'Ulun Danu Beratan', detail: 'Tempio sul lago, il classico', tag: '75k IDR · ⛩️' },
+      { time: 'SAB sera', action: 'Cena a Munduk', detail: 'Don Biyu per vista risaie' },
+      { time: 'DOM 06:30', action: 'Sekumpul', detail: 'IL momento. Top di Bali. Trek 1h', tag: '125k IDR · 💦' },
+      { time: 'DOM 12:00', action: 'Pranzo + rientro', detail: 'Strada lunga, 3h30 in moto' },
+      { time: 'DOM 17:00', action: 'Canggu', detail: 'Doccia e cena tranquilla' },
+    ],
+    why: 'Il modo migliore per coprire 4 highlights del nord senza correre. Munduk fresco a 1000m, riposi davvero.', cost: '~1.5M IDR' },
+  { id: 'it-6', name: 'Weekend Est: Sidemen + Amed', type: 'weekend', emoji: '🌅', gradient: 5, duration: '2 notti', nights: 2, leaveBy: 'Ven 14:00', backBy: 'Dom sera', drive: 120, difficulty: 'medium', tagline: 'Risaie autentiche + snorkeling', rating: 4.8,
+    stops: [
+      { time: 'VEN 14:00', action: 'Parti da Canggu', detail: 'Via Ubud verso est. 3h di guida' },
+      { time: 'VEN 17:30', action: 'Arrivo Sidemen', detail: 'Subak Tabola Villa o Wapa di Ume' },
+      { time: 'SAB 05:30', action: 'Partenza Lempuyang', detail: 'Devi essere lì all\'apertura' },
+      { time: 'SAB 06:30', action: 'Gates of Heaven', detail: 'Foto + tempio vero. 1h30', tag: '120k IDR · ⛩️' },
+      { time: 'SAB 10:00', action: 'Tirta Gangga', detail: 'Palazzo d\'acqua, koi, statue', tag: '90k IDR · ⛩️' },
+      { time: 'SAB 12:00', action: 'Amed snorkeling', detail: 'USS Liberty a Tulamben pomeriggio', tag: '50k rental · 🐠' },
+      { time: 'DOM 07:00', action: 'Besakih', detail: 'Tempio madre sull\'Agung. 2h', tag: '150k IDR · ⛩️' },
+      { time: 'DOM 11:00', action: 'Rientro lento', detail: 'Via Sidemen, foto risaie' },
+      { time: 'DOM 16:00', action: 'Canggu', detail: 'Casa' },
+    ],
+    why: 'Sidemen + costa est = Bali autentica. Lempuyang DEVE essere all\'alba o salti. Snorkeling Tulamben è world-class.', cost: '~1.4M IDR' },
+  { id: 'it-7', name: 'Mount Batur sunrise', type: 'weekend', emoji: '🌋', gradient: 7, duration: '1 notte', nights: 1, leaveBy: 'Ven 18:00', backBy: 'Sab pomeriggio', drive: 120, difficulty: 'hard', tagline: 'Vulcano + alba sopra le nuvole', rating: 4.8,
+    stops: [
+      { time: 'VEN 18:00', action: 'Parti da Canggu', detail: 'Cena leggera a Ubud sulla strada' },
+      { time: 'VEN 21:00', action: 'Arrivo Kintamani', detail: 'Homestay base trekking. Dormi 4-5h' },
+      { time: 'SAB 02:30', action: 'Sveglia', detail: 'Caffè, snack' },
+      { time: 'SAB 03:30', action: 'Inizio trek', detail: 'Guida obbligatoria, 2h salita al buio', tag: '500k guida · 🌋' },
+      { time: 'SAB 05:45', action: 'Vetta', detail: 'Alba sopra le nuvole. Colazione con uova al vapore' },
+      { time: 'SAB 07:30', action: 'Discesa', detail: 'Più facile di giorno. 1h30' },
+      { time: 'SAB 10:00', action: 'Hot springs', detail: 'Toya Devasya per recupero gambe' },
+      { time: 'SAB 13:00', action: 'Pranzo + rientro', detail: 'Pranzo a Ubud, poi Canggu' },
+      { time: 'SAB 16:00', action: 'Canggu', detail: 'Sarai distrutto, dormi presto' },
+    ],
+    why: 'Esperienza che ti porti dietro. Una sola notte fuori, weekend non bruciato del tutto. Ma è duro.', cost: '~900k IDR' },
+  { id: 'it-8', name: 'Nusa Penida (1 notte)', type: 'weekend', emoji: '🏝️', gradient: 8, duration: '1 notte', nights: 1, leaveBy: 'Sab mattina', backBy: 'Dom pomeriggio', drive: 30, difficulty: 'hard', tagline: 'Kelingking + paesaggi alieni', rating: 4.9,
+    stops: [
+      { time: 'SAB 06:30', action: 'Sanur', detail: 'Da Canggu 1h. Parcheggia moto al porto' },
+      { time: 'SAB 08:00', action: 'Fast boat', detail: '30min. Compra ticket online (Maruti)', tag: '400k a/r · ⛴️' },
+      { time: 'SAB 09:00', action: 'Affitta scooter', detail: 'Sull\'isola, 100k/giorno. Strade tremende' },
+      { time: 'SAB 10:00', action: 'Kelingking Beach', detail: 'Il T-Rex. Vista dall\'alto iconica', tag: '🏝️' },
+      { time: 'SAB 14:00', action: 'Broken Beach + Angel\'s', detail: '15min da Kelingking, paesaggi lunari' },
+      { time: 'SAB sera', action: 'Crystal Bay', detail: 'Tramonto + cena pesce. Dormi qui' },
+      { time: 'DOM 06:00', action: 'Diamond Beach', detail: 'Costa est, alba pazzesca, meno folla' },
+      { time: 'DOM 11:00', action: 'Atuh Beach', detail: 'Spiaggia di sotto, snorkeling' },
+      { time: 'DOM 14:00', action: 'Ritorno', detail: 'Barca verso Sanur + moto a Canggu' },
+    ],
+    why: 'Paesaggi che la main island non ha. Scogliere a strapiombo, acqua turchese. Pesante ma indimenticabile.', cost: '~1.5M IDR' },
+];
+
+const diffMap = { easy: { label: 'Facile', emoji: '🟢' }, medium: { label: 'Medio', emoji: '🟡' }, hard: { label: 'Tosto', emoji: '🔴' } };
+
+function useLocalStorage(key, defaultVal) {
+  const [val, setVal] = useState(() => { try { const stored = localStorage.getItem(key); return stored ? JSON.parse(stored) : defaultVal; } catch { return defaultVal; } });
+  useEffect(() => { try { localStorage.setItem(key, JSON.stringify(val)); } catch {} }, [key, val]);
+  return [val, setVal];
+}
+
+function App() {
+  const [completed, setCompleted] = useLocalStorage('bali-done-v3', {});
+  const [tab, setTab] = useState('explore');
+  const [filter, setFilter] = useState('all');
+  const [openId, setOpenId] = useState(null);
+  const [showInstall, setShowInstall] = useLocalStorage('bali-install-hidden', false);
+
+  const stats = useMemo(() => {
+    const done = Object.values(completed).filter(Boolean).length;
+    const days = Math.max(0, Math.ceil((END_DATE - new Date()) / (1000*60*60*24)));
+    return { done, total: itineraries.length, days };
+  }, [completed]);
+
+  const filtered = useMemo(() => {
+    if (filter === 'all') return itineraries;
+    if (filter === 'morning') return itineraries.filter(i => i.type === 'morning');
+    if (filter === 'weekend') return itineraries.filter(i => i.type === 'weekend');
+    if (filter === 'todo') return itineraries.filter(i => !completed[i.id]);
+    if (filter === 'easy') return itineraries.filter(i => i.difficulty === 'easy');
+    return itineraries;
+  }, [filter, completed]);
+
+  const todayRec = useMemo(() => {
+    const now = new Date(); const day = now.getDay(); const hour = now.getHours();
+    const dayName = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'][day];
+    const isWeekend = day === 5 || day === 6 || day === 0;
+    if (isWeekend) return { day: dayName, msg: 'È weekend, giornata piena 🎉', sub: 'Hai tempo per un trip lungo. Ecco i migliori weekend disponibili.', emoji: '🌴', recs: itineraries.filter(i => i.type === 'weekend' && !completed[i.id]).slice(0, 3) };
+    if (hour >= 13) return { day: dayName, msg: 'Lavoro time 💻', sub: 'Tardi per uscire. Pianifica domani mattina, sveglia presto.', emoji: '🌙', recs: itineraries.filter(i => i.type === 'morning' && !completed[i.id]).slice(0, 3) };
+    if (hour < 6) return { day: dayName, msg: 'Sveglia perfetta ☀️', sub: 'Sei in tempo per qualsiasi mattina. Parti adesso, eviti traffico e caldo.', emoji: '🌅', recs: itineraries.filter(i => i.type === 'morning' && !completed[i.id]).slice(0, 4) };
+    const left = 13 - hour;
+    return { day: dayName, msg: `Hai ~${left}h prima del rientro`, sub: 'Trip vicini a Canggu, niente di troppo lungo.', emoji: '⏰', recs: itineraries.filter(i => i.type === 'morning' && !completed[i.id] && i.drive <= left * 30).slice(0, 4) };
+  }, [completed]);
+
+  const openIt = itineraries.find(i => i.id === openId);
+
+  return h('div', null,
+    h('div', { className: 'header' },
+      h('div', { className: 'header-top' },
+        h('div', { className: 'logo' }, h('span', { className: 'logo-emoji' }, '🌴'), 'bali·trip'),
+        h('div', { className: 'day-counter' }, '🗓️ ', h('span', { className: 'num' }, stats.days), ' giorni')
+      ),
+      h('div', { className: 'progress-row' },
+        h('span', { className: 'progress-text' }, `${stats.done}/${stats.total}`),
+        h('div', { className: 'progress-bar' }, h('div', { className: 'progress-fill', style: { width: `${(stats.done/stats.total)*100}%` } })),
+        h('span', null, `${Math.round((stats.done/stats.total)*100)}%`)
+      )
+    ),
+    h('div', { className: 'tabs' },
+      [{ id: 'explore', label: 'Esplora', emoji: '🧭' }, { id: 'today', label: 'Oggi', emoji: '☀️' }, { id: 'plan', label: '4 settimane', emoji: '📅' }].map(t =>
+        h('button', { key: t.id, className: `tab ${tab === t.id ? 'active' : ''}`, onClick: () => setTab(t.id) },
+          h('span', { className: 'tab-emoji' }, t.emoji), t.label
+        )
+      )
+    ),
+    tab === 'explore' && h(React.Fragment, null,
+      h('div', { className: 'filters' },
+        [{ id: 'all', label: 'Tutto', emoji: '✨' }, { id: 'morning', label: 'Mattine', emoji: '☀️' }, { id: 'weekend', label: 'Weekend', emoji: '🌅' }, { id: 'easy', label: 'Facile', emoji: '🟢' }, { id: 'todo', label: 'Da fare', emoji: '📌' }].map(f =>
+          h('button', { key: f.id, className: `pill ${filter === f.id ? 'active' : ''}`, onClick: () => setFilter(f.id) },
+            h('span', { className: 'pill-emoji' }, f.emoji), f.label
+          )
+        )
+      ),
+      h('div', { className: 'content' },
+        filtered.length === 0
+          ? h('div', { className: 'empty' }, h('span', { className: 'empty-emoji' }, '🎉'), h('div', { className: 'empty-title' }, 'Tutto fatto!'), h('div', { className: 'empty-sub' }, 'Hai completato tutti gli itinerari di questa categoria.'))
+          : filtered.map(it => h(Card, { key: it.id, it, done: !!completed[it.id], onOpen: () => setOpenId(it.id), onToggle: (e) => { e.stopPropagation(); setCompleted({ ...completed, [it.id]: !completed[it.id] }); } }))
+      )
+    ),
+    tab === 'today' && h('div', { className: 'content' },
+      h('div', { className: 'today-hero' }, h('span', { className: 'today-emoji' }, todayRec.emoji), h('div', { className: 'today-day' }, todayRec.day), h('div', { className: 'today-msg' }, todayRec.msg), h('div', { className: 'today-sub' }, todayRec.sub)),
+      todayRec.recs.length === 0
+        ? h('div', { className: 'empty' }, h('span', { className: 'empty-emoji' }, '✨'), h('div', { className: 'empty-title' }, 'Niente in lista oggi'), h('div', { className: 'empty-sub' }, 'Cambia filtri o riposati.'))
+        : todayRec.recs.map(it => h(Card, { key: it.id, it, done: !!completed[it.id], onOpen: () => setOpenId(it.id), onToggle: (e) => { e.stopPropagation(); setCompleted({ ...completed, [it.id]: !completed[it.id] }); } }))
+    ),
+    tab === 'plan' && h(PlanView, { completed, setCompleted, onOpen: setOpenId }),
+    h(Sheet, { it: openIt, onClose: () => setOpenId(null), done: openIt && !!completed[openIt.id], onToggle: () => openIt && setCompleted({ ...completed, [openIt.id]: !completed[openIt.id] }) }),
+    !showInstall && /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches &&
+      h('div', { className: 'install-hint' }, h('span', { className: 'emoji' }, '📲'), h('div', { className: 'install-hint-text' }, h('strong', null, 'Salva sul telefono'), 'Tap su Condividi → "Aggiungi a Home"'), h('button', { onClick: () => setShowInstall(true) }, '×'))
+  );
+}
+
+function Card({ it, done, onOpen, onToggle }) {
+  const diff = diffMap[it.difficulty];
+  return h('div', { className: `card ${done ? 'done' : ''}`, onClick: onOpen },
+    h('div', { className: `card-hero gradient-${it.gradient}` },
+      h('div', { className: 'card-hero-bg' }, it.emoji),
+      h('div', { className: 'card-badge' }, it.type === 'morning' ? '☀️ Mattina' : `🌅 ${it.nights}N Weekend`),
+      h('button', { className: `card-fav ${done ? 'done' : ''}`, onClick: onToggle }, done ? '✓' : '♡')
+    ),
+    h('div', { className: 'card-content' },
+      h('div', { className: 'card-title-row' }, h('div', { className: 'card-title' }, it.name), h('div', { className: 'card-rating' }, '★ ', it.rating)),
+      h('div', { className: 'card-tagline' }, it.tagline),
+      h('div', { className: 'card-meta' }, h('span', null, '⏱️ ', it.duration), h('span', null, '🛵 ', it.drive, 'min'), h('span', null, diff.emoji, ' ', diff.label)),
+      h('div', { className: 'card-price' }, h('strong', null, it.cost), ' · parti ', it.leaveBy)
+    )
+  );
+}
+
+function Sheet({ it, onClose, done, onToggle }) {
+  if (!it) return null;
+  const diff = diffMap[it.difficulty];
+  return h(React.Fragment, null,
+    h('div', { className: 'sheet-overlay open', onClick: onClose }),
+    h('div', { className: 'sheet open' },
+      h('div', { className: 'sheet-handle', onClick: onClose }),
+      h('div', { className: 'sheet-content' },
+        h('div', { className: `sheet-hero gradient-${it.gradient}` }, it.emoji),
+        h('div', { className: 'sheet-title' }, it.name),
+        h('div', { className: 'sheet-tagline' }, it.tagline),
+        h('div', { className: 'stats-row' },
+          h('div', { className: 'stat-box' }, h('span', { className: 'stat-emoji' }, '⏱️'), h('div', { className: 'stat-val' }, it.duration), h('div', { className: 'stat-lbl' }, 'durata')),
+          h('div', { className: 'stat-box' }, h('span', { className: 'stat-emoji' }, '🛵'), h('div', { className: 'stat-val' }, it.drive + 'min'), h('div', { className: 'stat-lbl' }, 'da Canggu')),
+          h('div', { className: 'stat-box' }, h('span', { className: 'stat-emoji' }, diff.emoji), h('div', { className: 'stat-val' }, diff.label), h('div', { className: 'stat-lbl' }, 'difficoltà'))
+        ),
+        h('div', { className: 'section-title' }, '⏰ Programma'),
+        h('div', { className: 'timeline' },
+          it.stops.map((s, i) => h('div', { key: i, className: 'timeline-item' },
+            h('div', { className: 'timeline-time' }, s.time),
+            h('div', { className: 'timeline-marker' }, h('div', { className: `timeline-dot ${s.tag ? '' : 'minor'}` }), h('div', { className: 'timeline-line' })),
+            h('div', { className: 'timeline-content' }, h('div', { className: 'timeline-action' }, s.action), h('div', { className: 'timeline-detail' }, s.detail), s.tag && h('span', { className: 'timeline-tag' }, s.tag))
+          ))
+        ),
+        h('div', { className: 'tip-box green' }, h('div', { className: 'tip-header' }, '💡 Perché farlo'), h('div', { className: 'tip-text' }, it.why)),
+        h('div', { className: 'budget-box' }, h('div', { className: 'budget-lbl' }, '💰 Budget stimato'), h('div', { className: 'budget-val' }, it.cost)),
+        h('div', { className: 'btn-row' },
+          h('button', { className: `btn btn-primary ${done ? 'done' : ''}`, onClick: onToggle }, done ? '✓ Completato' : '○ Segna come fatto'),
+          h('button', { className: 'btn btn-secondary', onClick: () => {
+            const places = { 'tanah lot': [-8.621213, 115.086807], 'taman ayun': [-8.5418, 115.1725], 'tirta empul': [-8.4157, 115.3153], 'tegallalang': [-8.4317, 115.2793], 'jatiluwih': [-8.3701, 115.1312], 'ulun danu': [-8.2752, 115.1668], 'tibumana': [-8.5068, 115.3331], 'tukad cepung': [-8.4410, 115.3868], 'sekumpul': [-8.1775, 115.1826], 'banyumala': [-8.2172, 115.1017], 'munduk': [-8.2541, 115.0791], 'wanagiri': [-8.2403, 115.1075], 'sidemen': [-8.4648, 115.4478], 'tirta gangga': [-8.4123, 115.5873], 'lempuyang': [-8.3918, 115.6316], 'besakih': [-8.3740, 115.4526], 'amed': [-8.3379, 115.6630], 'batur': [-8.2309, 115.4071], 'kintamani': [-8.2309, 115.4071], 'penida': [-8.7514, 115.4732], 'kelingking': [-8.7514, 115.4732] };
+            const firstStop = it.stops.find(s => s.tag); let target = null;
+            for (const key in places) { if (firstStop && firstStop.action.toLowerCase().includes(key)) { target = places[key]; break; } }
+            if (!target) target = [-8.45, 115.25];
+            window.open(`https://www.google.com/maps/dir/?api=1&origin=${CANGGU.lat},${CANGGU.lng}&destination=${target[0]},${target[1]}&travelmode=driving`, '_blank');
+          } }, '🗺️ Mappa')
+        )
+      )
+    )
+  );
+}
+
+function PlanView({ completed, setCompleted, onOpen }) {
+  const weeks = [
+    { n: 1, title: 'Adattamento', sub: 'Tieni breve, no trip lunghi', mornings: ['it-1'], weekend: 'it-5', note: 'Hai cambiato fuso e clima. Una mattina sola di esplorazione, il weekend lo dedichi al nord che è la zona più "wow" e meno faticosa.' },
+    { n: 2, title: 'Cultura Ubud', sub: 'Templi e risaie classiche', mornings: ['it-3', 'it-2'], weekend: 'it-6', note: 'Settimana centrale, sei in pieno ritmo. Due mattine ambiziose verso Ubud + weekend a Sidemen per la costa est.' },
+    { n: 3, title: 'Slow + vulcano', sub: 'Mattine corte, weekend epico', mornings: ['it-4'], weekend: 'it-7', note: 'Dopo due weekend pieni serve recupero. Una mattina lunga (Jatiluwih), poi alba sul vulcano: una notte sola.' },
+    { n: 4, title: 'Chiusura', sub: 'Quello che è rimasto', mornings: [], weekend: 'it-8', note: 'Ultimi giorni. Recuperi quello che hai saltato. Nusa Penida opzionale.' },
+  ];
+  return h('div', { className: 'content' },
+    weeks.map(w => h('div', { key: w.n, className: 'week-card' },
+      h('div', { className: 'week-header' }, h('div', { className: 'week-num' }, w.n), h('div', { className: 'week-title' }, w.title)),
+      h('div', { className: 'week-sub' }, w.sub),
+      h('div', { className: 'week-note' }, w.note),
+      w.mornings.length > 0 && h(React.Fragment, null,
+        h('div', { className: 'week-list-title' }, '☀️ Mattine'),
+        w.mornings.map(id => { const it = itineraries.find(x => x.id === id); return h('div', { key: id, className: `week-list-item ${completed[id] ? 'done' : ''}`, onClick: () => onOpen(id) }, h('span', { className: 'emoji' }, it.emoji), it.name, completed[id] && ' ✓'); })
+      ),
+      h('div', { className: 'week-list-title' }, '🌅 Weekend'),
+      (() => { const it = itineraries.find(x => x.id === w.weekend); return h('div', { className: `week-list-item ${completed[w.weekend] ? 'done' : ''}`, onClick: () => onOpen(w.weekend) }, h('span', { className: 'emoji' }, it.emoji), it.name, completed[w.weekend] && ' ✓'); })()
+    ))
+  );
+}
+
+const root = createRoot(document.getElementById('root'));
+root.render(h(App));
+</script>
+</body>
+</html>
